@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 
 const Header = () => {
     return (
-      <header class="h-16 bg-gray-300 text-purple-900 ">
+      <header class="h-16 bg-gray-300 text-purple-900 flex justify-between">
         <div class="flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +20,10 @@ const Header = () => {
           <h1>Client Portal</h1>
         </div>
         <Navbar />
+        <div>
+          <button>Login</button>
+          <button>Register</button>
+        </div>
       </header>
     );
 }
