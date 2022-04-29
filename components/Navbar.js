@@ -3,7 +3,7 @@ import Link  from "next/link";
 const Navbar = () => {
     return (
       <nav>
-        <ul class="flex gap-3">
+        <ul className="flex gap-3">
           <li>
             <Link href="/">
               <a>Home</a>
