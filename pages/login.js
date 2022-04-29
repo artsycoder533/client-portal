@@ -2,8 +2,10 @@ import { useState } from "react";
 import FormInput from "../components/FormInput";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useRouter } from 'next/router';
 
 const Login = () => {
+    const router = useRouter();
   const [showRegister, setShowRegister] = useState(false);
   const [formInputs, setFormInputs] = useState({
     username: "",
@@ -73,7 +75,8 @@ const Login = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(auth.currentUser, { displayName: username });
-      setUser({ ...auth.currentUser });
+        setUser({ ...auth.currentUser });
+        router.replace("/clients");
     } catch (error) {
       //if an error is found user must alread exist
       console.log(error.message);
