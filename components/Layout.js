@@ -5,10 +5,8 @@ const Layout = ({ children }) => {
     return (
       <>
         <Header />
-            <main>
-                {children}
-            </main>
-            <Footer />
+        <main className="h-[calc(100vh-64px-40px)]">{children}</main>
+        <Footer />
       </>
     );
 }
