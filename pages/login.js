@@ -72,7 +72,7 @@ const Login = () => {
       result = true;
     }
 
-    if (confirm.length === 0 && showRegister) {
+    if (confirm_password.length === 0 && showRegister) {
       confirmError = "Passwords do not match!";
       result = true;
     }
@@ -136,7 +136,7 @@ const Login = () => {
         {showRegister ? (
           <FormInput
             label="Confirm Password:"
-            type="confirm_password"
+            type="password"
             name="confirm_password"
             id="confirm_password"
             htmlFor="confirm_password"
