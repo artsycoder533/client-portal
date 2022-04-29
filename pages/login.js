@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useRouter } from "next/router";
 
@@ -19,7 +19,11 @@ const Login = () => {
     pasword_error: "",
     confirm_error: "",
   });
-  const [user, setUser] = useState({});
+    const [user, setUser] = useState({});
+    
+    onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+})
 
   const toggleForm = (e) => {
     e.preventDefault();
@@ -44,12 +48,11 @@ const Login = () => {
     const status = validateFormInputs();
     //if error found
     if (status) {
-      //do something
       return;
     } else {
       //register user with firebase
       registerUser();
-      //resetErrors();
+      resetErrors();
     }
   };
 
