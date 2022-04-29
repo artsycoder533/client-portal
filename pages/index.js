@@ -13,6 +13,7 @@ export default function Home() {
       </Head>
 
       <section className="flex flex-col items-center justify-center h-[calc(100vh-64px)]">
+        <h2 className="text-6xl text-purple-800 font-bold mb-20">Client Portal</h2>
         <Image
           src={heroImg}
           width={400}

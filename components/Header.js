@@ -20,7 +20,7 @@ const Header = () => {
                   />
                   <path d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z" />
                 </svg>
-                <h1 className="uppercase">Client Portal</h1>
+                <h1 className="uppercase">CP</h1>
               </a>
             </Link>
           </div>
