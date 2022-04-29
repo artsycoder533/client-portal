@@ -23,10 +23,7 @@ const Header = () => {
           <Navbar />
           <div className="flex gap-2">
             <button className="px-4 py-2 border-1 bg-purple-800 text-white">
-              Login
-            </button>
-            <button className="px-4 py-2 border-1  text-purple-800">
-              Register
+              Logout
             </button>
           </div>
         </div>

@@ -1,13 +1,13 @@
 import Header from "./Header";
 
 const Layout = ({ children }) => {
-    return ( 
-        <>
-            <Header />
+    return (
+      <>
+        <Header />
             <main>
                 {children}
             </main>
-        </>
+      </>
     );
 }
  
