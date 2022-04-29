@@ -6,26 +6,30 @@ import { auth } from "../utils/firebase";
 const Login = () => {
   const [showRegister, setShowRegister] = useState(false);
   const [formInputs, setFormInputs] = useState({
+    username: "",
     email: "",
     password: "",
     confirm_password: "",
   });
   const [formErrors, setFormErrors] = useState({
+    name_error: "",
     email_error: "",
     pasword_error: "",
     confirm_error: "",
   });
-    const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
 
   const toggleForm = (e) => {
     e.preventDefault();
     setShowRegister(!showRegister);
     setFormErrors({
+      username_error: "",
       email_error: "",
       password_error: "",
       confirm_error: "",
     });
     setFormInputs({
+      username: "",
       email: "",
       password: "",
       confirm_password: "",
@@ -46,38 +50,44 @@ const Login = () => {
     //if error found
     if (status) {
       //do something
-        console.log("form validation error");
+      console.log("form validation error");
     } else {
       //register user with firebase
-        registerUser();
+      registerUser();
       setFormInputs({
+        username: "",
         email: "",
         password: "",
         confirm_password: "",
       });
       setFormErrors({
+        username_error: "",
         email_error: "",
         password_error: "",
         confirm_error: "",
       });
     }
-    };
-    
-    const registerUser = async () => {
-        try {
-            console.log("inside register user");
-            const user = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(user);
-            //setUser({ user });
-        } catch (error) {
-            //if an error is found user must alread exist
-            console.log(error.message);
-            //change confirm error to reflect message
-        }
+  };
+
+  const registerUser = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(auth.currentUser, { displayName: username });
+      setUser({ ...auth.currentUser });
+    } catch (error) {
+      //if an error is found user must alread exist
+      console.log(error.message);
+      //change confirm error to reflect message
+        setFormErrors({
+            ...formErrors,
+            confirm_error: error.message
+        });
     }
+  };
 
   const validateFormInputs = () => {
-    let emailError,
+    let usernameError,
+      emailError,
       passwordError,
       confirmError = "";
     let result = false;
@@ -96,11 +106,9 @@ const Login = () => {
     }
 
     //if wrong type
-      if (password.length === 0) {
-        passwordError="Password cannot be blank!"
-    }
-    
-      else if (password.length < 8) {
+    if (password.length === 0) {
+      passwordError = "Password cannot be blank!";
+    } else if (password.length < 8) {
       passwordError = "Password must be a min of 8 characters!";
       result = true;
     }
@@ -110,9 +118,13 @@ const Login = () => {
         confirmError = "Passwords do not match!";
         result = true;
       }
+      if (username.length === 0) {
+        usernameError = "Name cannot be blank!";
+      }
     }
     setFormErrors({
       ...formErrors,
+      username_error: usernameError,
       email_error: emailError,
       password_error: passwordError,
       confirm_error: confirmError,
@@ -120,8 +132,9 @@ const Login = () => {
     return result;
   };
 
-  const { email, password, confirm_password } = formInputs;
-  const { email_error, password_error, confirm_error } = formErrors;
+  const { email, password, confirm_password, username } = formInputs;
+  const { email_error, password_error, confirm_error, username_error } =
+    formErrors;
 
   return (
     <section className="flex border-3 h-[calc(100vh-64px-40px)] justify-center items-center bg-gray-200">
@@ -131,6 +144,19 @@ const Login = () => {
         <h2 className="text-xl uppercase text-purple-800 font-bold text-center">
           {showRegister ? "Register" : "Login"}
         </h2>
+        {showRegister && (
+          <FormInput
+            label="Name:"
+            type="text"
+            name="username"
+            id="username"
+            htmlFor="username"
+            value={username}
+            error={username_error}
+            onChange={handleInput}
+          />
+        )}
+
         <FormInput
           label="Email:"
           type="email"
