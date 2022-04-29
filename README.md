@@ -30,7 +30,10 @@ Client Portal is an application I am building to that is inspired by a problem o
 
 ## My Process
 
-I learned the differences between React and Next.Js.  This website was initially build with html, sass, and javascript.  To facilitate scaling, I decided to build the rebranded site in React.  I then learned that when you build a site with React its actually bad for SEO, so I started to look into Next.Js.  I noticed that there were quite a few similarities between the two so I decided to rebuild the site yet again, but this time with Next.Js. 
+- Created the landing page
+- Added Header/Footer
+- Added Login/Registration form with conditional rendering
+- Added form validation
 
 ### Built With
 
