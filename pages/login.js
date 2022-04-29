@@ -38,14 +38,14 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email_error === "User already exists!") {
+    if (email_error === "User email already exists!") {
       return;
     }
     const status = validateFormInputs();
     //if error found
     if (status) {
       //do something
-        return;
+      return;
     } else {
       //register user with firebase
       registerUser();
@@ -55,30 +55,30 @@ const Login = () => {
 
   const registerUser = async () => {
     try {
-        const user = await createUserWithEmailAndPassword(auth, email, password);
-        updateUsername(user);
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      updateUsername(user);
     } catch (error) {
       //if an error is found user must alread exist
-        console.log(error.message);
-        //change confirm error to reflect message
-          resetErrors();
-          setFormErrors({
-            ...formErrors,
-            email_error: "User email already exists!",
-          });
+      console.log(error.message);
+      //change confirm error to reflect message
+      resetErrors();
+      setFormErrors({
+        ...formErrors,
+        email_error: "User email already exists!",
+      });
     }
-    };
-    
-    const updateUsername = async (userInfo) => {
-        console.log(userInfo);
-        try {
-            await updateProfile(user, { displayName: username });
-            setUser({ ...user });
-          router.replace("/clients");
-        } catch (error) {
-            console.log(error.message);
-        }
+  };
+
+  const updateUsername = async (userInfo) => {
+    console.log(userInfo);
+    try {
+      await updateProfile(user, { displayName: username });
+      setUser({ ...user });
+      router.replace("/clients");
+    } catch (error) {
+      console.log(error.message);
     }
+  };
 
   const resetErrors = () => {
     setFormErrors({
