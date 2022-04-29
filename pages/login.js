@@ -1,5 +1,7 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [showRegister, setShowRegister] = useState(false);
@@ -13,6 +15,7 @@ const Login = () => {
     pasword_error: "",
     confirm_error: "",
   });
+    const [user, setUser] = useState({});
 
   const toggleForm = (e) => {
     e.preventDefault();
@@ -43,8 +46,10 @@ const Login = () => {
     //if error found
     if (status) {
       //do something
+        console.log("form validation error");
     } else {
       //register user with firebase
+        registerUser();
       setFormInputs({
         email: "",
         password: "",
@@ -56,7 +61,20 @@ const Login = () => {
         confirm_error: "",
       });
     }
-  };
+    };
+    
+    const registerUser = async () => {
+        try {
+            console.log("inside register user");
+            const user = await createUserWithEmailAndPassword(auth, email, password);
+            console.log(user);
+            //setUser({ user });
+        } catch (error) {
+            //if an error is found user must alread exist
+            console.log(error.message);
+            //change confirm error to reflect message
+        }
+    }
 
   const validateFormInputs = () => {
     let emailError,
