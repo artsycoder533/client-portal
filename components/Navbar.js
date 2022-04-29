@@ -12,7 +12,7 @@ const Navbar = () => {
           <li>
             <Link href="/clients">
               <a className="px-4 py-2 border-1 bg-purple-800 text-white flex gap-1">
-                Clients{" "}
+                Clients
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

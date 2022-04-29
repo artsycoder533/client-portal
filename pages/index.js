@@ -20,7 +20,7 @@ export default function Home() {
           height={400}
         className="block" />
         <Link href="/login" className="block">
-          <a className="px-4 py-2 bg-purple-800 text-white mt-8 hover:scale-110 transition ease-linear duration-300">Login / Register</a>
+          <a className="btn ">Login / Register</a>
         </Link>
       </section>
     </div>
