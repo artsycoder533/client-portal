@@ -1,34 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Client Portal
 
-## Getting Started
+##  Table of contents
 
-First, run the development server:
+- [Overview](#overview)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+- [Author](#author)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Client Portal is an application I am building to that is inspired by a problem one of my freelance clients is facing. They need a application to keep track of insurance payments for their clients as well as appointment dates.  I am using Next.js, Firebase 9, and Tailwind for the build!
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Screenshot
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Desktop Screenshot: 
+![Desktop Screenshot]()
+- Mobile Screenshot: 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    ![Mobile Screenshot]()
 
-## Learn More
+### Links
 
-To learn more about Next.js, take a look at the following resources:
+- Live site URL: []()
+- Github Repository URL: [https://github.com/artsycoder533/client-portal.git](https://github.com/artsycoder533/client-portal.git)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## My Process
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+I learned the differences between React and Next.Js.  This website was initially build with html, sass, and javascript.  To facilitate scaling, I decided to build the rebranded site in React.  I then learned that when you build a site with React its actually bad for SEO, so I started to look into Next.Js.  I noticed that there were quite a few similarities between the two so I decided to rebuild the site yet again, but this time with Next.Js. 
 
-## Deploy on Vercel
+### Built With
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js
+- Tailwind
+- Firebase
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### What I learned
+
+ - Problem: Why is my external link not opening in another window?
+ - Solution: 
+    - The Link component is only for internal navigation, while it still does take you to an external site, it ignores the target="_blank" attribute.  To achieve this functionality you only use a regular anchor tag for external links.
+
+        In Footer.js
+
+        `<a
+              href="https://natashajohnson.dev/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="underline">
+              {" "}
+              Natasha Johnson
+            </a>`
+
+        
+
+### Continued Development
+
+
+
+## Author
+
+- Portfolio - [https://natashajohnson.dev/](https://natashajohnson.dev/)
