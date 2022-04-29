@@ -72,8 +72,8 @@ const Login = () => {
   const updateUsername = async (userInfo) => {
     console.log(userInfo);
     try {
-      await updateProfile(user, { displayName: username });
-      setUser({ ...user });
+      await updateProfile(userInfo.user, { displayName: username });
+      setUser({ ...userInfo.user });
       router.replace("/clients");
     } catch (error) {
       console.log(error.message);
