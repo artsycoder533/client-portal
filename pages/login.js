@@ -2,10 +2,10 @@ import { useState } from "react";
 import FormInput from "../components/FormInput";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 const Login = () => {
-    const router = useRouter();
+  const router = useRouter();
   const [showRegister, setShowRegister] = useState(false);
   const [formInputs, setFormInputs] = useState({
     username: "",
@@ -24,18 +24,8 @@ const Login = () => {
   const toggleForm = (e) => {
     e.preventDefault();
     setShowRegister(!showRegister);
-    setFormErrors({
-      username_error: "",
-      email_error: "",
-      password_error: "",
-      confirm_error: "",
-    });
-    setFormInputs({
-      username: "",
-      email: "",
-      password: "",
-      confirm_password: "",
-    });
+    resetErrors();
+    resetInputs();
   };
 
   const handleInput = (e) => {
@@ -48,44 +38,64 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (email_error === "User already exists!") {
+      return;
+    }
     const status = validateFormInputs();
     //if error found
     if (status) {
       //do something
-      console.log("form validation error");
+        return;
     } else {
       //register user with firebase
       registerUser();
-      setFormInputs({
-        username: "",
-        email: "",
-        password: "",
-        confirm_password: "",
-      });
-      setFormErrors({
-        username_error: "",
-        email_error: "",
-        password_error: "",
-        confirm_error: "",
-      });
+      //resetErrors();
     }
   };
 
   const registerUser = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(auth.currentUser, { displayName: username });
-        setUser({ ...auth.currentUser });
-        router.replace("/clients");
+        const user = await createUserWithEmailAndPassword(auth, email, password);
+        updateUsername(user);
     } catch (error) {
       //if an error is found user must alread exist
-      console.log(error.message);
-      //change confirm error to reflect message
-        setFormErrors({
+        console.log(error.message);
+        //change confirm error to reflect message
+          resetErrors();
+          setFormErrors({
             ...formErrors,
-            confirm_error: error.message
-        });
+            email_error: "User email already exists!",
+          });
     }
+    };
+    
+    const updateUsername = async (userInfo) => {
+        console.log(userInfo);
+        try {
+            await updateProfile(user, { displayName: username });
+            setUser({ ...user });
+          router.replace("/clients");
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+  const resetErrors = () => {
+    setFormErrors({
+      username_error: "",
+      email_error: "",
+      password_error: "",
+      confirm_error: "",
+    });
+  };
+
+  const resetInputs = () => {
+    setFormInputs({
+      username: "",
+      email: "",
+      password: "",
+      confirm_password: "",
+    });
   };
 
   const validateFormInputs = () => {
