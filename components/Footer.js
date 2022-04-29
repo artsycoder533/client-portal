@@ -1,4 +1,3 @@
-import Link from "next/link";
 
 const Footer = () => {
 
@@ -9,12 +8,17 @@ const Footer = () => {
     }
 
     return (
-      <footer className="flex justify-center items-center bg-purple-800 text-white h-10">
+      <footer className="flex justify-center items-center bg-purple-800 text-white h-10 text-center">
         <p>
-          Copyright &copy; <span>{getYear()}</span> Coded & Created by:
-          <Link href="https://natashajohnson.dev/">
-            <a className="underline"> Natasha Johnson</a>
-          </Link>
+          Copyright &copy; <span>{getYear()}</span> By:
+            <a
+              href="https://natashajohnson.dev/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="underline">
+              {" "}
+              Natasha Johnson
+            </a>
         </p>
       </footer>
     );
