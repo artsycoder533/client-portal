@@ -2,9 +2,19 @@ import Navbar from "./Navbar";
 import Link from "next/link";
 import { useContext } from "react";
 import { AuthContext } from "../Context";
+import { auth } from "../utils/firebase";
+import { signOut } from "firebase/auth";
 
 const Header = () => {
-  const {isLoggedIn} = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
+  
+  const logoutUser = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   
     return (
       <header className="flex items-center h-16 text-purple-900 bg-gray-300 ">
@@ -30,7 +40,7 @@ const Header = () => {
           </div>
           {isLoggedIn ? <><Navbar />
           <div>
-            <button className="flex gap-1 px-4 py-2 text-white bg-purple-800 border-1">
+              <button className="flex gap-1 px-4 py-2 text-white bg-purple-800 border-1" onClick={logoutUser}>
               Logout{" "}
               <span>
                 <svg
