@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import FormInput from "../components/FormInput";
-import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useRouter } from "next/router";
+import { AuthContext } from "../Context";
 
 const Login = () => {
   const router = useRouter();
@@ -19,11 +24,16 @@ const Login = () => {
     pasword_error: "",
     confirm_error: "",
   });
-    const [user, setUser] = useState({});
-    
+  // const [user, setUser] = useState({});
+  const { setUser } = useContext(AuthContext);
+
+  useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-})
+      setUser(currentUser);
+    });
+  }, []);
+
+  
 
   const toggleForm = (e) => {
     e.preventDefault();
@@ -156,8 +166,8 @@ const Login = () => {
     <section className="flex border-3 h-[calc(100vh-64px-40px)] justify-center items-center bg-gray-200">
       <form
         action=""
-        className="flex flex-col w-96 gap-4 bg-white drop-shadow-lg p-8">
-        <h2 className="text-xl uppercase text-purple-800 font-bold text-center">
+        className="flex flex-col gap-4 p-8 bg-white w-96 drop-shadow-lg">
+        <h2 className="text-xl font-bold text-center text-purple-800 uppercase">
           {showRegister ? "Register" : "Login"}
         </h2>
         {showRegister && (
@@ -209,7 +219,7 @@ const Login = () => {
           type="submit"
           value={showRegister ? "Register" : "Login"}
           onClick={handleSubmit}
-          className="btn cursor-pointer"
+          className="cursor-pointer btn"
         />
         {showRegister ? (
           <p className="text-center">

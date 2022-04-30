@@ -1,11 +1,12 @@
+import { useContext } from 'react';
 import { auth } from "../utils/firebase";
+import { AuthContext } from "../Context";
 
 const Clients = () => {
-    console.log(auth.currentUser);
+    const { user } = useContext(AuthContext);
     return (
         <section>
-            
-            {/* <h1>Hello, {auth.currentUser.displayName}</h1> */}
+            <h1>Welcome, {user.displayName}</h1>
         </section>
     );
 }
