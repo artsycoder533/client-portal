@@ -2,13 +2,16 @@ import { useState, useEffect, useContext } from "react";
 import FormInput from "../components/FormInput";
 import {
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useRouter } from "next/router";
+import { AuthContext } from "../Context";
 
 const Login = () => {
   const router = useRouter();
+  const { setUser } = useContext(AuthContext);
   const [showRegister, setShowRegister] = useState(false);
   const [formInputs, setFormInputs] = useState({
     username: "",
@@ -49,7 +52,13 @@ const Login = () => {
       return;
     } else {
       //register user with firebase
-      registerUser();
+      if (showRegister) {
+        registerUser();
+      }
+      else {
+        loginUser();
+      }
+      
       resetErrors();
     }
   };
@@ -69,6 +78,17 @@ const Login = () => {
       });
     }
   };
+
+  const loginUser = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      router.replace("clients");
+      resetErrors();
+      resetInputs();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   const updateUsername = async (userInfo) => {
     console.log(userInfo);
