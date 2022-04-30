@@ -99,7 +99,7 @@ Client Portal is an application I am building to that is inspired by a problem o
     ```
 
 
-- Problem: How do you add a displayName to a user in Firebase?
+- Problem: How do you add/update a displayName to a user in Firebase?
  - Solution: 
     - I made a seperate function called updateUsername that utilized the updateProfile function from Firebase.  At first I tried to combine this functionality inside the try/catch block inside of the registerUser function but I figured out that I kept getting an error, becasue if the user tried to register with an already registered email I was then trying to update the profile of a user that didnt exist.  To remedy this I added another try catch block inside of the updateUsername function so that I was only updating the profile of an existing user.
 
@@ -118,6 +118,34 @@ Client Portal is an application I am building to that is inspired by a problem o
   };
    ```
 
+- Problem: How do you keep a user logged in after refresh?
+ - Solution: 
+    - Firebase has a built in function called onAuthStateChanged that acts as a listener for the logged in status of a user.  I moved this to the Auth context inside of a useEffect.  Anytime the status of a user is changed theres a function inside that changes a state value asscociated with the login status of the user.  When the page is refreshed the status of the user is pulled from Firebase and then the app can update accordingly.
+
+  In Context.js
+
+   ```
+    useEffect(() => {
+         onAuthStateChanged(auth, (currentUser) => {
+           if (currentUser) {
+               setUser(currentUser);
+               setIsLoggedIn(true);
+           } else {
+               setIsLoggedIn(false);
+           }
+         });
+    }, []);
+   ```
+
+   - Problem: How do you implement protected routes?
+ - Solution: 
+    - 
+
+  In 
+
+   ```
+    
+   ```
         
 
 ### Continued Development
