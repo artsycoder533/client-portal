@@ -1,10 +1,14 @@
 import Navbar from "./Navbar";
 import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "../Context";
 
 const Header = () => {
+  const {isLoggedIn} = useContext(AuthContext);
+  
     return (
-      <header className="h-16 bg-gray-300 text-purple-900 flex items-center ">
-        <div className="flex container mx-auto justify-between items-center">
+      <header className="flex items-center h-16 text-purple-900 bg-gray-300 ">
+        <div className="container flex items-center justify-between mx-auto">
           <div>
             <Link href="/">
               <a className="flex items-center text-4xl font-bold">
@@ -24,12 +28,27 @@ const Header = () => {
               </a>
             </Link>
           </div>
-          <Navbar />
-          {/* <div className="">
-            <button className="px-4 py-2 border-1 bg-purple-800 text-white">
-              Logout
+          {isLoggedIn ? <><Navbar />
+          <div>
+            <button className="flex gap-1 px-4 py-2 text-white bg-purple-800 border-1">
+              Logout{" "}
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  />
+                </svg>
+              </span>
             </button>
-          </div> */}
+          </div></> : null}
         </div>
       </header>
     );

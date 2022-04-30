@@ -1,6 +1,7 @@
-import Link  from "next/link";
+import Link from "next/link";
 
 const Navbar = () => {
+  
     return (
       <nav>
         <ul className="flex gap-3">
@@ -11,12 +12,12 @@ const Navbar = () => {
           </li> */}
           <li>
             <Link href="/clients">
-              <a className="px-4 py-2 border-1 bg-purple-800 text-white flex gap-1">
+              <a className="flex gap-1 px-4 py-2 text-white bg-purple-800 border-1">
                 Clients
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="w-6 h-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -33,12 +34,12 @@ const Navbar = () => {
           </li>
           <li>
             <Link href="/add">
-              <a className="px-4 py-2 border-1 bg-purple-800 text-white flex gap-1">
+              <a className="flex gap-1 px-4 py-2 text-white bg-purple-800 border-1">
                 Add Client
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="w-6 h-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
