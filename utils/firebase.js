@@ -12,8 +12,6 @@ const firebaseConfig = {
   appId: "1:779414941202:web:4f28da3979cee90cedf2cb",
 };
 
-console.log(process.env.NEXT_PUBLIC_PRIVATE_API_KEY);
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore();

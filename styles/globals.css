@@ -5,5 +5,5 @@
 @layer components {
     .btn {
         @apply px-4 py-2 bg-purple-800 text-white mt-8 hover:scale-110 transition ease-linear duration-300
-}
+    }
 }
