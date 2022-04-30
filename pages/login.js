@@ -3,11 +3,9 @@ import FormInput from "../components/FormInput";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useRouter } from "next/router";
-import { AuthContext } from "../Context";
 
 const Login = () => {
   const router = useRouter();
@@ -24,16 +22,6 @@ const Login = () => {
     pasword_error: "",
     confirm_error: "",
   });
-  // const [user, setUser] = useState({});
-  const { setUser } = useContext(AuthContext);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-  }, []);
-
-  
 
   const toggleForm = (e) => {
     e.preventDefault();
