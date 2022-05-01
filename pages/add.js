@@ -1,9 +1,21 @@
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../Context";
+import { useRouter } from "next/router";
+
 const AddClient = () => {
-    return (
-      <section className="grow">
-        <h1>Add Client</h1>
-      </section>
-    );
-}
- 
+
+  const router = useRouter();
+  const { isLoggedIn } = useContext(AuthContext);
+
+  useEffect(() => {
+    isLoggedIn ? router.push("/") : router.push("/add");
+  });
+
+  return (
+    <section className="grow">
+      <h1>Add Client</h1>
+    </section>
+  );
+};
+
 export default AddClient;
