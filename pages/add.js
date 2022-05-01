@@ -8,7 +8,7 @@ const AddClient = () => {
   const { isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
-    isLoggedIn ? router.push("/") : router.push("/add");
+    isLoggedIn ? router.push("/add") : router.push("/login");
   });
 
   return (

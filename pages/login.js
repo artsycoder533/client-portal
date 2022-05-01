@@ -11,7 +11,7 @@ import { AuthContext } from "../Context";
 
 const Login = () => {
   const router = useRouter();
-  const { setUser } = useContext(AuthContext);
+  const { setUser, isLoggedIn } = useContext(AuthContext);
   const [showRegister, setShowRegister] = useState(false);
   const [formInputs, setFormInputs] = useState({
     username: "",
@@ -25,6 +25,10 @@ const Login = () => {
     pasword_error: "",
     confirm_error: "",
   });
+
+  useEffect(() => {
+    isLoggedIn ? router.push("clients") : router.push("/login");
+  }, []);
 
   const toggleForm = (e) => {
     e.preventDefault();
@@ -43,7 +47,10 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email_error === "User email already exists!") {
+    if (
+      email_error === "User email already exists!" ||
+      email_error === "Invalid email and/or password!"
+    ) {
       return;
     }
     const status = validateFormInputs();
@@ -87,11 +94,15 @@ const Login = () => {
       resetInputs();
     } catch (error) {
       console.log(error.message);
+      resetErrors();
+      setFormErrors({
+        ...formErrors,
+        email_error: "Invalid email and/or password!",
+      });
     }
   }
 
   const updateUsername = async (userInfo) => {
-    console.log(userInfo);
     try {
       await updateProfile(userInfo.user, { displayName: username });
       setUser({ ...userInfo.user });

@@ -7,13 +7,12 @@ const Clients = () => {
     const { user, isLoggedIn } = useContext(AuthContext);
    
     useEffect(() => {
-        isLoggedIn ? router.push("/") : router.push("/clients");
-    });
+        isLoggedIn ? router.push("clients") : router.push("/login");
+    }, []);
 
     return (
         <section>
             {isLoggedIn && <h1>Welcome, {user.displayName}</h1>}
-            {!isLoggedIn && <h1>Please sign in!</h1>}
         </section>
     );
 }
