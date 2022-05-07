@@ -8,7 +8,7 @@ const Clients = () => {
    
     useEffect(() => {
         isLoggedIn ? router.push("clients") : router.push("/login");
-    }, []);
+    }, [isLoggedIn]);
 
     return (
         <section>

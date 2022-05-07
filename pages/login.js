@@ -28,7 +28,7 @@ const Login = () => {
 
   useEffect(() => {
     isLoggedIn ? router.push("clients") : router.push("/login");
-  }, []);
+  }, [isLoggedIn]);
 
   const toggleForm = (e) => {
     e.preventDefault();
@@ -249,7 +249,7 @@ const Login = () => {
           </p>
         ) : (
           <p className="text-center">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <button className="underline" onClick={toggleForm}>
               Register!
             </button>

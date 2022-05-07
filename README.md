@@ -137,7 +137,17 @@ Client Portal is an application I am building to that is inspired by a problem o
     }, []);
    ```
 
-   - Problem: How do you implement protected routes?
+- Problem: How do you implement protected routes?
+ - Solution: 
+    - 
+
+  In 
+
+   ```
+    
+   ```
+
+- Problem: How do you make sure the user goes back to the same page they were just on on page refresh?
  - Solution: 
     - 
 

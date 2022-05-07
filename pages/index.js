@@ -17,6 +17,7 @@ export default function Home() {
           src={heroImg}
           width={400}
           height={400}
+          alt="logo"
         className="block" />
         <Link href="/login" className="block">
           <a className="btn ">Login / Register</a>
