@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from "../Context";
 import { useRouter } from 'next/router';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { db } from '../utils/firebase';
 
 const Clients = () => {
     const [clients, setClients] = useState([]);
