@@ -8,7 +8,7 @@ const FormInput = ({label, type, name, id, htmlFor, onChange, value, error}) => 
           id={id}
           onChange={onChange}
           value={value}
-          className="border-1 bg-purple-200 p-1"
+          className={`bg-purple-200 p-1 ${error && 'bg-red-300 border-3 border-red-700'}`}
         />
         <span className="text-red-500">{error}</span>
       </div>

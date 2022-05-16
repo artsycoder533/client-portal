@@ -36,7 +36,60 @@ const AddClient = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validInputs = verifyFormInputs();
+    if (validInputs) {
+      //add data to firebase
+    }
+    else {
+      setTimeout(() => {
+        resetFormErrors();
+      }, 3000);
+    }
   }
+
+  const verifyFormInputs = () => {
+    let firstNameErr, lastNameErr, emailErr, phoneErr, insuranceErr, appTypeErr = "";
+
+    if (!firstName) {
+      firstNameErr = "First name cannot be blank!";
+    }
+    if (!lastName) {
+      lastNameErr = "Last name cannot be blank!";
+    }
+    if (!email) {
+      emailErr = "Email cannot be be blank!";
+    }
+    if (!phone) {
+      phoneErr = "Phone number cannot be blank!";
+    }
+    if (!insurance) {
+      insuranceErr = "You must select an insurance!";
+    }
+    if (!apptType) {
+      appTypeErr = "You must select an appointment type!";
+    }
+
+    setAddErrors({
+      firstName_error: firstNameErr,
+      lastName_error: lastNameErr,
+      email_error: emailErr,
+      phone_error: phoneErr,
+      insurance_error: insuranceErr,
+      apptType_error: appTypeErr,
+    });
+  }
+
+  const resetFormErrors=() => {
+    setAddErrors({
+      firstName_error: "",
+      lastName_error: "",
+      email_error: "",
+      phone_error: "",
+      insurance_error: "",
+      apptType_error: "",
+    });
+  }
+  
 
   const addClientToFirebase = () => {
     
