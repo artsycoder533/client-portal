@@ -1,4 +1,4 @@
-const FormInput = ({label, type, name, id, htmlFor, onChange, value, error}) => {
+const FormInput = ({label, type, name, id, htmlFor, onChange, value, error, minLength, maxLength, pattern}) => {
     return (
       <div className="flex flex-col">
         <label htmlFor={htmlFor}>{label}</label>
@@ -8,6 +8,9 @@ const FormInput = ({label, type, name, id, htmlFor, onChange, value, error}) => 
           id={id}
           onChange={onChange}
           value={value}
+          minLength={minLength}
+          maxLength={maxLength}
+          pattern={pattern}
           className={`bg-purple-200 p-1 ${error && 'bg-red-300 border-3 border-red-700'}`}
         />
         <span className="text-red-500">{error}</span>

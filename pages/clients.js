@@ -23,7 +23,7 @@ const Clients = () => {
             setClients(snapshotDocs);
         });
         return unsubscribe;
-    }, []);
+    }, [clients]);
 
     return (
         <section>
