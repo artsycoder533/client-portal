@@ -3,6 +3,7 @@ import { AuthContext } from "../Context";
 import { useRouter } from 'next/router';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../utils/firebase';
+import Link from 'next/link';
 
 const Clients = () => {
     const [clients, setClients] = useState([]);
@@ -26,9 +27,27 @@ const Clients = () => {
     }, [clients]);
 
     return (
-        <section>
-            {isLoggedIn && <h1>Welcome, {user.displayName}</h1>}
-        </section>
+      <section>
+        {isLoggedIn && (
+          <h1 className="text-left p-4">Welcome, {user.displayName}</h1>
+        )}
+        <ul className="list-none flex flex-col gap-4 container max-w-lg p-1 m-auto">
+          {clients.length
+            ? clients.map((client, index) => {
+                const { firstName, lastName } = client;
+                return (
+                  <li key={index} className="p-2 bg-purple-100 hover:shadow-lg hover:bg-purple-300">
+                    <Link href="">
+                      <a className="block">
+                        {lastName}, {firstName}
+                      </a>
+                    </Link>
+                  </li>
+                );
+              })
+            : null}
+        </ul>
+      </section>
     );
 }
  
