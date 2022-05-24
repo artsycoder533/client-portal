@@ -24,7 +24,8 @@ const Clients = () => {
             setClients(snapshotDocs);
         });
         return unsubscribe;
-    }, [clients]);
+    }, []);
+
 
     return (
       <section>
@@ -36,9 +37,9 @@ const Clients = () => {
             ? clients.map((client, index) => {
                 const { firstName, lastName } = client;
                 return (
-                  <li key={index} className="p-2 bg-purple-100 hover:shadow-lg hover:bg-purple-300">
+                  <li key={index} className="p-2 shadow-sm bg-purple-100 hover:shadow-xl hover:bg-purple-300">
                     <Link href="">
-                      <a className="block">
+                      <a className="block font-semibold">
                         {lastName}, {firstName}
                       </a>
                     </Link>
