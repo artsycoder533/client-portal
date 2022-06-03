@@ -17,7 +17,7 @@ const Clients = () => {
     //get clients from firebase
     useEffect(() => {
         const clientCollection = collection(db, "clients");
-        const q = query(clientCollection, orderBy("lastName", "desc"));
+        const q = query(clientCollection, orderBy("lastName"));
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const snapshotDocs = [];
             snapshot.forEach((doc) => snapshotDocs.push(doc.data()));
