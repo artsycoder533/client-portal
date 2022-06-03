@@ -6,7 +6,7 @@ import { db } from '../utils/firebase';
 import Link from 'next/link';
 
 const Clients = () => {
-    const [clients, setClients] = useState([]);
+  const [clients, setClients] = useState([]);
     const router = useRouter();
     const { user, isLoggedIn } = useContext(AuthContext);
    
@@ -32,12 +32,24 @@ const Clients = () => {
         {isLoggedIn && (
           <h1 className="text-left p-4">Welcome, {user.displayName}</h1>
         )}
+        <div className="flex container max-w-lg p-1 m-auto mb-4 items-center">
+          <label htmlFor="search">Search for Client: </label>
+          <input
+            type="search"
+            name="search"
+            id="search"
+            className="border-2 flex-1 p-1 ml-2"
+          />
+          <input type="submit" value="Search" className="btn m-0" />
+        </div>
         <ul className="list-none flex flex-col gap-4 container max-w-lg p-1 m-auto">
           {clients.length
             ? clients.map((client, index) => {
                 const { firstName, lastName } = client;
                 return (
-                  <li key={index} className="p-2 shadow-sm bg-purple-100 hover:shadow-xl hover:bg-purple-300">
+                  <li
+                    key={index}
+                    className="p-2 shadow-sm bg-purple-100 hover:shadow-xl hover:bg-purple-300">
                     <Link href="">
                       <a className="block font-semibold">
                         {lastName}, {firstName}
