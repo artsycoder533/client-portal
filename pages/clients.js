@@ -43,23 +43,6 @@ const Clients = () => {
     setSearchClient(value);
   }
 
-  const searchForClient = (e) => {
-    e.preventDefault();
-    //validate input
-    // const isError = validateSearch();
-    // if (!isError) {
-    //   set
-    // }
-  }
-
-  const validateSearch = () => {
-    let result = false;
-    if (searchClient === "") {
-      result = true;
-    }
-    return result;
-  }
-
   return (
     <section>
       {isLoggedIn && (
@@ -74,12 +57,6 @@ const Clients = () => {
           className="border-2 flex-1 p-1 ml-2"
           value={searchClient}
           onChange={handleSearch}
-        />
-        <input
-          type="submit"
-          value="Search"
-          className="btn m-0"
-          onClick={searchForClient}
         />
       </div>
       <ul className="list-none flex flex-col gap-4 container max-w-lg p-1 m-auto">
