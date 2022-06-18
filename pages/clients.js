@@ -18,7 +18,7 @@ const Clients = () => {
 
   //get clients from firebase
   useEffect(() => {
-    const clientCollection = collection(db, "clients");
+    const clientCollection = collection(db, user.email);
     const q = query(clientCollection, orderBy("lastName"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const snapshotDocs = [];
@@ -75,7 +75,7 @@ const Clients = () => {
                 </li>
               );
             })
-          : null}
+          : <p>You havent added any clients to your portal.  Add a client to start populating your portal</p>}
       </ul>
     </section>
   );

@@ -9,7 +9,7 @@ import { db } from "../utils/firebase";
 
 const AddClient = () => {
   const router = useRouter();
-  const { isLoggedIn } = useContext(AuthContext);
+  const {user, isLoggedIn } = useContext(AuthContext);
   const [client, setClient] = useState({
     firstName: "",
     lastName: "",
@@ -26,6 +26,8 @@ const AddClient = () => {
     insurance_error: "",
     apptType_error: ""
   });
+
+ //console.log(user.email);
 
   useEffect(() => {
     isLoggedIn ? router.push("/add") : router.push("/login");
@@ -121,7 +123,7 @@ const AddClient = () => {
   const addClientToFirebase = async () => {
     console.log("inside add to firebase");
     try {
-      await addDoc(collection(db, "clients"), {
+      await addDoc(collection(db, user.email), {
         ...client,
       });
     } catch (e) {
