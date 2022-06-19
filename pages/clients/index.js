@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Context";
+import { AuthContext } from "../../Context";
 import { useRouter } from "next/router";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import { db } from "../../utils/firebase";
 import Link from "next/link";
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
   const [copyOfClients, setCopyOfClients] = useState([]);
   const [searchClient, setSearchClient] = useState("");
-  const router = useRouter();
+    const router = useRouter();
+    const {id} = router.query
   const { user, isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
@@ -30,18 +31,21 @@ const Clients = () => {
   }, []);
 
   useEffect(() => {
-    const filteredClients = clients.filter(client => {
+    const filteredClients = clients.filter((client) => {
       const { lastName, firstName } = client;
-      
-      return lastName.toLowerCase().includes(searchClient.toLowerCase()) || firstName.toLowerCase().includes(searchClient.toLowerCase());
+
+      return (
+        lastName.toLowerCase().includes(searchClient.toLowerCase()) ||
+        firstName.toLowerCase().includes(searchClient.toLowerCase())
+      );
     });
     setCopyOfClients(filteredClients);
-  }, [searchClient])
+  }, [searchClient]);
 
   const handleSearch = (e) => {
     const { value } = e.target;
     setSearchClient(value);
-  }
+  };
 
   return (
     <section>
@@ -60,22 +64,27 @@ const Clients = () => {
         />
       </div>
       <ul className="list-none flex flex-col gap-4 container max-w-lg p-1 m-auto">
-        {copyOfClients.length
-          ? copyOfClients.map((client, index) => {
-              const { firstName, lastName } = client;
-              return (
-                <li
-                  key={index}
-                  className="p-2 shadow-sm bg-purple-100 hover:shadow-xl hover:bg-purple-300">
-                  <Link href="">
-                    <a className="block font-semibold">
-                      {lastName}, {firstName}
-                    </a>
-                  </Link>
-                </li>
-              );
-            })
-          : <p>You havent added any clients to your portal.  Add a client to start populating your portal</p>}
+        {copyOfClients.length ? (
+          copyOfClients.map((client, index) => {
+            const { firstName, lastName } = client;
+            return (
+              <li
+                key={index}
+                className="p-2 shadow-sm bg-purple-100 hover:shadow-xl hover:bg-purple-300">
+                <Link href={`/clients/${lastName}-${firstName}`}>
+                  <a className="block font-semibold">
+                    {lastName}, {firstName}
+                  </a>
+                </Link>
+              </li>
+            );
+          })
+        ) : (
+          <p>
+            You havent added any clients to your portal. Add a client to start
+            populating your portal
+          </p>
+        )}
       </ul>
     </section>
   );
